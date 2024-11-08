@@ -1,0 +1,12 @@
+﻿[tmpReident]
+Visible=False
+
+[serviceDB.qryProdutorProprio]
+Visible=False
+
+[serviceDB.TableComunicadoReident]
+Visible=False
+
+[serviceDB.TableDetComReident]
+Visible=False
+

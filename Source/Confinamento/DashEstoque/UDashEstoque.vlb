@@ -1,0 +1,12 @@
+﻿[serviceDB.qryConfigPadrao]
+Visible=False
+
+[serviceDB.PropriedadePropria]
+Visible=False
+
+[frmPrincipal.qryGrid]
+Visible=False
+
+[serviceDBN.GMD_ANUAL_FAZENDA]
+Visible=False
+

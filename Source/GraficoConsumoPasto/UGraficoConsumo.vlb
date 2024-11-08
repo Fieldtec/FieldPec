@@ -1,0 +1,9 @@
+﻿[serviceDB.qryConfigPadrao]
+Visible=False
+
+[serviceDB.PropriedadePropria]
+Visible=False
+
+[frmPrincipal.qryGrid]
+Visible=False
+

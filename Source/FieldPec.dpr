@@ -1,0 +1,131 @@
+program FieldPec;
+
+
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  UPrincipal in 'UPrincipal.pas' {frmPrincipal},
+  UCadPadrao in 'CadPadrao\UCadPadrao.pas' {frmCadPadrao},
+  UAuxMotivoMorte in 'AuxMotivoMorte\UAuxMotivoMorte.pas' {frmAuxMotivoMorte},
+  UAuxMotivoMovimentacao in 'AuxMotivoMovimentacao\UAuxMotivoMovimentacao.pas' {frmCadAuxMov},
+  UAuxOcorrencia in 'AuxOcorrencia\UAuxOcorrencia.pas' {frmAuxOcorrencia},
+  UCalendario in 'Calendario\UCalendario.pas' {frmCadCalendario},
+  UCurrais in 'Currais\UCurrais.pas' {frmCadCurral},
+  UDashboard in 'DashBoard\UDashboard.pas' {frmWeb},
+  UEntradaGrupo in 'EntradaGrupo\UEntradaGrupo.pas' {V},
+  UEntradaEstoqueMineral in 'Estoque\Entrada\UEntradaEstoqueMineral.pas' {frmEntradaEstoqueMineral},
+  UFornecedorSuplemento in 'FornecedorSuplemento\UFornecedorSuplemento.pas' {frmCadFornecedorMineral},
+  UFornecimentoMineral in 'FornecimentoMineral\UFornecimentoMineral.pas' {frmCadFornecimento},
+  UCadGTA in 'GTA\UCadGTA.pas' {frmCadGTA},
+  UMovimentacaoGrupo in 'MovimentacaoGrupo\UMovimentacaoGrupo.pas' {frmMovimentacaoGrupo},
+  UMsgDlg in 'msgDlg\UMsgDlg.pas' {FrmmsgDlg},
+  UPlanNutri in 'PlanNutri\UPlanNutri.pas' {frmCadPlanNutri},
+  UPropriedadeParceira in 'PropriedadeParceira\UPropriedadeParceira.pas' {frmCadPropriedades},
+  UCadRaca in 'Raca\UCadRaca.pas' {frmCadRacas},
+  USaidaGrupo in 'SaidaGrupo\USaidaGrupo.pas' {frmSaidaGrupo},
+  UServiceDB in 'Service\UServiceDB.pas' {serviceDB: TDataModule},
+  USuplementoMineral in 'SuplementoMineral\USuplementoMineral.pas' {frmCadSuplementoMineral},
+  UCadUsers in 'Users\UCadUsers.pas' {frmCadUsers},
+  UCadCategoria in 'Categoria\UCadCategoria.pas' {frmCadCategoria},
+  UPrevisaoForn in 'PrevForn\UPrevisaoForn.pas' {frmPrevisao},
+  UMsgDlgRel in 'msgDlg\UMsgDlgRel.pas' {FrmmsgDlgRel},
+  UEntAnimal in 'EntradaAnimal\UEntAnimal.pas' {frmOpercaoEntrada},
+  UMovimentacaoPesagemAnimal in 'MovimentacaoPesagemInd\UMovimentacaoPesagemAnimal.pas' {frmMovPesagemAnimal},
+  USaidaInd in 'SaidaInd\USaidaInd.pas' {frmSaidaInd},
+  UMyCustomThread in 'TThread\UMyCustomThread.pas',
+  URetiro in 'Retiro\URetiro.pas' {frmCadRetiro},
+  UCertificadora in 'Rastreabilidade\Certificadora\UCertificadora.pas' {frmCadCertificadora},
+  UFornecedorBrincos in 'Rastreabilidade\FornecedorBrincos\UFornecedorBrincos.pas' {frmCadFornBrincos},
+  UBND in 'Rastreabilidade\BND\UBND.pas' {frmCadBND},
+  UPedidoBrincos in 'Rastreabilidade\PedidoBrinco\UPedidoBrincos.pas' {frmCadPedido},
+  UComunicadoReidentificacao in 'Rastreabilidade\Comunicados\Reidentificacao\UComunicadoReidentificacao.pas' {frmCadComunicadoReident},
+  UComunicadoMorte in 'Rastreabilidade\Comunicados\Morte\UComunicadoMorte.pas' {frmComunicadoMorte},
+  UAuxMorte in 'Rastreabilidade\Comunicados\Morte\UAuxMorte.pas' {frmCadAuxMorte},
+  UComunicadoEntrada in 'Rastreabilidade\Comunicados\Entrada\UComunicadoEntrada.pas' {frmCadComunicadoEnt},
+  UComunicadoNascimento in 'Rastreabilidade\Comunicados\ComunicadoNascimento\UComunicadoNascimento.pas' {frmComunicadoNascimento},
+  UImportaLiberacao in 'Importacoes\UImportaLiberacao.pas' {frmImportaDataLiberacao},
+  UFabricanteFarmaco in 'Sanidade\Fabricantes\UFabricanteFarmaco.pas' {frmCadFabricanteFarmaco},
+  UFarmacos in 'Sanidade\Farmacos\UFarmacos.pas' {frmCadFarmaco},
+  UIndicaFarmaco in 'Sanidade\Auxiliar\UIndicaFarmaco.pas' {frmAuxIndicacaoFarmaco},
+  UProtocolo in 'Sanidade\Protocolo\UProtocolo.pas' {frmCadProtocolo},
+  UEstoqueFarmaco in 'Sanidade\Estoque\UEstoqueFarmaco.pas' {frmEstoqueFarmaco},
+  UTratamentos in 'Sanidade\Tratamentos\UTratamentos.pas' {frmTratamentoSani},
+  UTTA in 'Rastreabilidade\Comunicados\TTA\UTTA.pas' {frmTTA},
+  ServiceRel in 'ServiceRel\ServiceRel.pas' {SerRel: TDataModule},
+  UHistoricoMov in 'HistoricoMovimentacao\UHistoricoMov.pas' {frmHistMovimentacao},
+  UMorte in 'Morte\UMorte.pas' {frmMorte},
+  UNascimento in 'Nascimento\UNascimento.pas' {frmNascimento},
+  UCompradorGado in 'Comprador\UCompradorGado.pas' {frmCadCompradorGado},
+  UFiltrosRel in 'FiltrosRel\UFiltrosRel.pas' {frmFiltrosRel},
+  UMotivoAplicacao in 'AuxMotivoAplicacao\UMotivoAplicacao.pas' {frmAuxMotivoAplicacao},
+  UPlanUsoMineral in 'PlanejamentoUsoMineral\UPlanUsoMineral.pas' {frmPlanUsoMineral},
+  UDiariasOcupacao in 'DiariasOcupacao\UDiariasOcupacao.pas' {frmDiariasOcupacao},
+  UCurralConfinamento in 'CurralConfinamento\UCurralConfinamento.pas' {frmCadCurralConf},
+  USevIntegracao in 'ServiceIntegracao\USevIntegracao.pas' {srvIntegracao: TDataModule},
+  UIntegracaoTerceiros in 'IntegracaoTerceiros\UIntegracaoTerceiros.pas' {frmIntegracaoTerceiros},
+  UGraficoConsumo in 'GraficoConsumoPasto\UGraficoConsumo.pas' {frmGraficoConsumo},
+  ServiceDB2 in 'Service\ServiceDB2.pas' {serviceDBN: TDataModule},
+  UPluviometro in 'Pluviometro\UPluviometro.pas' {frmPluviometro},
+  UPluviometria in 'Pluviometria\UPluviometria.pas' {frmPluviometria},
+  UBebedouro in 'Bebedouro\UBebedouro.pas' {frmBebedouro},
+  UScorePasto in 'ScorePasto\UScorePasto.pas' {frmScorePasto},
+  UAlimentos in 'Alimentos\UAlimentos.pas' {frmCadAlimento},
+  UAuxRebanho in 'AuxRebanho\UAuxRebanho.pas' {frmCadRebanho},
+  URelHisObsManejo in 'Reports\HistoricoObsManejo\URelHisObsManejo.pas' {frmRelHistObsManejo},
+  UCadRacao in 'Confinamento\Racao\UCadRacao.pas' {frmCadRacao},
+  USeviceConfinamento in 'Service\USeviceConfinamento.pas' {ServiceConf: TDataModule},
+  UPlanConfi in 'Confinamento\PlanejamentoNutricional\UPlanConfi.pas' {frmPlanNutriConfi},
+  UPlanTratosPadrao in 'Confinamento\PlanejamentoTratos\UPlanTratosPadrao.pas' {frmCadPlanTratosPadrao},
+  ULoteNutricional in 'LoteNutricional\ULoteNutricional.pas' {frmLoteNutricional},
+  UAuxCargo in 'AuxCargo\UAuxCargo.pas' {frmAuxCargo},
+  UFornecimentoRacaoConf in 'Confinamento\FornecimentRacao\UFornecimentoRacaoConf.pas' {frmFornecimentoConf},
+  UAuxCadNotaCocho in 'Confinamento\Auxiliares\UAuxCadNotaCocho.pas' {frmCadAuxNotaCocho},
+  ULeituraCocho in 'Confinamento\LeituraCocho\ULeituraCocho.pas' {frmLeituradeCocho},
+  UdmReportConf in 'Confinamento\DmReportsConf\UdmReportConf.pas' {dmRelConf: TDataModule},
+  UAuxCentroCusto in 'AuxCentroCusto\UAuxCentroCusto.pas' {frmAuxCentroCusto},
+  UBaixaEstoque in 'Estoque\Saida\UBaixaEstoque.pas' {frmCadBaixaEstoqueInd},
+  UDashLotes in 'Confinamento\DashLotes\UDashLotes.pas' {frmDashLotes},
+  ContratoCompra in 'ContratoCompraAnimal\ContratoCompra.pas' {frmContratoCompra},
+  uFormat in 'util\uFormat.pas',
+  UDashEstoque in 'Confinamento\DashEstoque\UDashEstoque.pas' {frmDashBoard},
+  URelatorioZooConf in 'RelatorioZooConf\URelatorioZooConf.pas' {frmRelatorioZooConf},
+  URelGMD in 'RelatorioGMD\URelGMD.pas' {frmRelGMD},
+  UServiceBaseCampo in 'Service\UServiceBaseCampo.pas' {DMBaseCampo: TDataModule},
+  UBaseCampo in 'BaseCampo\UBaseCampo.pas' {frmBaseCampo},
+  UVeiculosEmbarque in 'VeiculosEmbarque\UVeiculosEmbarque.pas' {frmVeiculosEmbarquer},
+  UHistMovRebanho in 'HitsMovRebanho\UHistMovRebanho.pas' {frmHistMovRebanho},
+  URelFinanceiro in 'Confinamento\RelFinanceiro\URelFinanceiro.pas' {frmRelFinanceiro},
+  UBaixaManualFarmaco in 'Sanidade\BaixaManual\UBaixaManualFarmaco.pas' {frmBaixaManualFarmaco},
+  URelSaida in 'RelatorioSaida\URelSaida.pas' {frmRelSaida},
+  URateioOutrosCustos in 'RateioOutrosCustos\URateioOutrosCustos.pas' {frmReteioOutrosCustos},
+  UCustoFixo in 'CustoFixo\UCustoFixo.pas' {frmCustoFixo},
+  FabricaNew in 'Confinamento\Fabricacao\FabricaNew.pas' {frmFabricaNew},
+  UEstoqueChip in 'EstoqueChip\UEstoqueChip.pas' {frmCadPedidoChip},
+  URetiradaChip in 'RetiradaChip\URetiradaChip.pas' {frmRetiradaChip},
+  UServiceNew in 'Service\UServiceNew.pas' {ServiceNew: TDataModule},
+  UCapataz in 'Capataz\UCapataz.pas' {frmCadCapataz},
+  UMedicoVeterinario in 'UMedicoVeterinario.pas' {frmCadVeterinario},
+  UCadOperacao in 'CadastroOperacao\UCadOperacao.pas' {frmCadOperacao},
+  UResponsavelRastreabilidade in 'ResponsavelRastreabilidade\UResponsavelRastreabilidade.pas' {frmCadRespRastreabilidade},
+  UGerenteOperacional in 'GerenteOperacional\UGerenteOperacional.pas' {frmCadGerenteOperacional},
+  UVagao in 'vagao\UVagao.pas' {frmCadVagao};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TserviceDB, serviceDB);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TDMBaseCampo, DMBaseCampo);
+  Application.CreateForm(TserviceDBN, serviceDBN);
+  Application.CreateForm(TSerRel, SerRel);
+  Application.CreateForm(TServiceConf, ServiceConf);
+  Application.CreateForm(TdmRelConf, dmRelConf);
+  Application.CreateForm(TServiceNew, ServiceNew);
+  Application.CreateForm(TfrmFabricaNew, frmFabricaNew);
+  Application.CreateForm(TfrmCadRespRastreabilidade, frmCadRespRastreabilidade);
+  Application.CreateForm(TfrmCadGerenteOperacional, frmCadGerenteOperacional);
+  Application.CreateForm(TfrmCadVagao, frmCadVagao);
+  Application.Run;
+end.

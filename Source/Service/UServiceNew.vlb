@@ -1,0 +1,15 @@
+﻿[serviceDB.qryConfigPadrao]
+Visible=False
+
+[serviceDB.PropriedadePropria]
+Visible=False
+
+[serviceDB.TTMP_ANIMAIS]
+Visible=False
+
+[frmPrincipal.qryGrid]
+Visible=False
+
+[frmPrincipal.dsGrid]
+Visible=False
+
